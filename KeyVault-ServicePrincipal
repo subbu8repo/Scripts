@@ -1,1 +1,2 @@
 az ad sp create-for-rbac -n azuredevopssp
+**\*.sln backslash in tasks not forwardslash
