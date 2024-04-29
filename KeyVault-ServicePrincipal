@@ -1,2 +1,4 @@
 az ad sp create-for-rbac -n azuredevopssp
 **\*.sln backslash in tasks not forwardslash
+WEBSITE_ENABLE_SYNC_UPDATE_SITE
+true   = env variables
