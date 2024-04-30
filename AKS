@@ -1,0 +1,5 @@
+az group create --name keyvault-demo --location eastus
+az aks create --name keyvault-demo-cluster -g keyvault-demo --node-count 1 --enable-addons azure-keyvault-secrets-provider --enable-oidc-issuer --enable-workload-identity
+az aks get-credentials --resource-group keyvault-demo --name keyvault-demo-cluster
+az keyvault create -n aks-demo-abhi -g keyvault-demo -l eastus --enable-rbac-authorization
+az group delete --name keyvault-demo
