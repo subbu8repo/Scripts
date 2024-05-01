@@ -1,0 +1,17 @@
+az account set --subscription ff4cb677-0364-4de2-8b81-693a24deb12a
+az aks get-credentials --resource-group HEALTHCARE-RG1 --name healthaks1 --overwrite-existing
+kubectl get deployments --all-namespaces=true
+kubectl get ns
+kubectl create ns dev
+kubectl get deployments --namespace <namespace-name>
+kubectl describe deployment <deployment-name> --namespace <namespace-name>
+kubectl get all -o wide
+kubectl get pods
+kubectl describe pod podname
+kubectl get Events
+kubectl get Events | grep mhc-front-67d5bc6b-zbdlx
+kubectl get nodes
+kubectl describe nodes
+kubectl describe nodes | grep 'Name:\|Allocated' -A 5 | grep 'Name\|cpu'
+kubectl -n kube-system logs $(kubectl -n kube-system get pods | grep scheduler|awk '{print$1}')
+
