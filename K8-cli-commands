@@ -16,4 +16,4 @@ kubectl describe nodes | grep 'Name:\|Allocated' -A 5 | grep 'Name\|cpu'
 kubectl -n kube-system logs $(kubectl -n kube-system get pods | grep scheduler|awk '{print$1}')
 
 resourses qata at namespace and to pods requests and limits
-1000m=1cpu that meeans cpu: "25m"=0.025 very very less
+1000m=1cpu that meeans cpu: "25m"=0.025 very very less oom=out of memory 
