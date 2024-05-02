@@ -29,7 +29,7 @@ sudo apt-get install -y apt-transport-https ca-certificates curl gpg
 curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.30/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
 echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.30/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
 sudo apt-get update
-sudo apt-get install -y kubelet kubeadm kubectl #(kubelet kubeadm kubectl all these three tools should share same version if any version mismatch k8s infra will not work the way it is)
+sudo apt-get install -y kubelet kubeadm kubectl                                           #(kubelet kubeadm kubectl all these three tools should share same version if any version mismatch k8s infra will not work the way it is)
 sudo apt-mark hold kubelet kubeadm kubectl 
 kubelet version
 kubelet --version
@@ -55,8 +55,8 @@ mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
-kubectl get nodes                # (if node is not ready check)
-kubectl describe node kubeadm-vm # (it is showing cni plugin is not initialized networkproxy is not installed you need to go and install a 3rd party network proxy on your k8 cluster)
+kubectl get nodes                                                           # (if node is not ready check)
+kubectl describe node kubeadm-vm                                           # (it is showing cni plugin is not initialized networkproxy is not installed you need to go and install a 3rd party network proxy on your k8 cluster)
 kubectl get ns
 kubectl create ns dev
 kubectl get all -n kube-system
@@ -65,15 +65,15 @@ kubectl get all -n kube-system
 # https://kubernetes.io/docs/concepts/cluster-administration/addons/#networking-and-network-policy and use last one the = weave net 
 #   weave net and run command
 kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml
-kubectl get all -n kube-system    # you can see core dns running
-kubectl get nodes                 # you can see status of node ready
+kubectl get all -n kube-system                                               # you can see core dns running
+kubectl get nodes                                                            # you can see status of node ready
 # your master node is ready ans by default can you run your application on master node no it will not let you deploy any pods, default namespace is where we can create pods
-kubectl get pods                   # can we create pods yes but it will not let you assign any resources to you because by default you can not create anything on master node you can check by running 
+kubectl get pods                                                             # can we create pods yes but it will not let you assign any resources to you because by default you can not create anything on master node you can check by running 
 kubectl run --image=nginx web-nginx
-kubectl get pods                   # you can see status in pending and if you run 
-kubectl describe pod podname(web-nginx)  #  run it and check events you can see failed scheduling and reason is untolerated taint and by default master node is tainted we can go and untaint it by running 
-kubectl taint nodes --all node-role.kubernetes.io/control-plane-    #check role name = control-plane   kubectl get nodes and check roles
-kubectl get pods                     # now you can see your pod is in running status
+kubectl get pods                                                              # you can see status in pending and if you run 
+kubectl describe pod podname(web-nginx)                                       #  run it and check events you can see failed scheduling and reason is untolerated taint and by default master node is tainted we can go and untaint it by running 
+kubectl taint nodes --all node-role.kubernetes.io/control-plane-              #check role name = control-plane   kubectl get nodes and check roles
+kubectl get pods                                                              # now you can see your pod is in running status
 
 
 
