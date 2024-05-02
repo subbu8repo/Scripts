@@ -13,7 +13,7 @@ kubectl get all -n dev
 kubectl describe pod podname
 kubectl run --image=nginx web-inginx
 kubectl get deployments
-kubectl get pods
+kubectl get pods     (kubectl get pods -o)
 kubectl describe pod podname     (check events)
 kubectl create deployment --help
 kubectl create deployment web-nginx --image=nginx --replicas=1
@@ -37,6 +37,13 @@ deployment.yml
 service.yml
 kubectl apply -f deployment.yml
 kubectl apply -f service.yml
+
+short-cut
+kubectl create deployment deploymentname --name=nginx --replicas=1 --dry-run=client -o yaml > web-nginx.yml
+
+dry-run will not deploy things for you it will create and give you a deployment template it will not execute anything and you can save in yaml format somewhere on local
+with adhoc command using --dry-run flag a deployment.yaml file gets created without execution if you want to execute remove timestamp, strategy, resource, status in file
+
 
 
 
