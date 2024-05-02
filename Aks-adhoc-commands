@@ -33,6 +33,11 @@ curl external-ip:80
 kubectl describe svc svcname  (check events)
 kubectl delete deployment deploymentname
 kubectl delete svc svcname
+deployment.yml
+service.yml
+kubectl apply -f deployment.yml
+kubectl apply -f service.yml
+
 
 
 
