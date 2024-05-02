@@ -14,15 +14,27 @@ kubectl describe pod podname
 kubectl run --image=nginx web-inginx
 kubectl get deployments
 kubectl get pods
-kubectl describe pod podname
+kubectl describe pod podname     (check events)
 kubectl create deployment --help
 kubectl create deployment web-nginx --image=nginx --replicas=1
+kubectl scale deployment deploymentname --replicas=6   (scaleup)
+kubectl scale deployment deploymentname --replicas=1   (scaleout)
+kubectl get all
 kubectl get deployments
-kubectl describe deployment deploymentname
+kubectl describe deployment deploymentname    (check events)
 see rollingupdate is the default strategy and default namespace, selectors, labels, replicas
-kubectl delete pod podname
+kubectl delete pod podname    (you can see another pod is replicating)
+kubectl delete deployment deploymentname
+kubectl get svc
+kubectl expose --help
+kubectl expose deployment deploymentname --port=80 --name=svcname --type=LoadBalancer
+kubectl get svc
+curl external-ip:80
+kubectl describe svc svcname  (check events)
 kubectl delete deployment deploymentname
 kubectl delete svc svcname
+
+
 
 
 
