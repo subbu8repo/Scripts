@@ -73,6 +73,7 @@ kubectl run --image=nginx web-nginx
 kubectl get pods                                                              # you can see status in pending and if you run 
 kubectl describe pod podname(web-nginx)                                       #  run it and check events you can see failed scheduling and reason is untolerated taint and by default master node is tainted we can go and untaint it by running 
 kubectl taint nodes --all node-role.kubernetes.io/control-plane-              #check role name = control-plane   kubectl get nodes and check roles
+kubectl get nodes
 kubectl get pods                                                              # now you can see your pod is in running status
 
 
