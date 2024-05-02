@@ -1,0 +1,97 @@
+# Kubeadm setup with 2vcpus and 4gb ram in linux vm
+ 
+# 1st part docker installation  =   Installing a container runtime
+
+# Add Docker's official GPG key:
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the repository to Apt sources:
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
+
+systemctl status docker
+systemctl status containerd
+docker ps
+docker ps -a
+
+# 2nd Installing kubeadm, kubelet and kubectl 
+
+sudo apt-get install -y apt-transport-https ca-certificates curl gpg
+curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.30/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.30/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+sudo apt-get update
+sudo apt-get install -y kubelet kubeadm kubectl #(kubelet kubeadm kubectl all these three tools should share same version if any version mismatch k8s infra will not work the way it is)
+sudo apt-mark hold kubelet kubeadm kubectl 
+kubelet version
+kubelet --version
+kubectl version
+
+# 3rd Creating a cluster with kubeadm
+# Initializing your control-plane node
+kubeadm init
+# if any error occurs like  container runtime is not running go to and remove
+rm -rf /etc/containerd/config.toml
+# after that restart it
+systemctl restart containerd
+systemctl status containerd
+history
+
+# (/* exact samething is done on other vm for worker node except kubeadm init and run the kubeadm join 
+kubeadm join 10.0.0.4:6443 --token 9c5b3v.gvb73erqo0gslfcy \
+        --discovery-token-ca-cert-hash sha256:1cf79f540845c58c8fc50d9827ae5751e41167c77dda34c12eaf570a3e3da33e*/ )
+
+# To start using your cluster, you need to run the following as a regular(normal) user come out of root and run this
+
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+kubectl get nodes                # (if node is not ready check)
+kubectl describe node kubeadm-vm # (it is showing cni plugin is not initialized networkproxy is not installed you need to go and install a 3rd party network proxy on your k8 cluster)
+kubectl get ns
+kubectl create ns dev
+kubectl get all -n kube-system
+# in this you can see pod/coredns services maintains dns mapping in your k8s cluster your dns mapping ip allocation all done by coredns and it is in pending state and by default you will not get it you need 
+# to have those coredns controller install on k8 cluster for that go to 
+# https://kubernetes.io/docs/concepts/cluster-administration/addons/#networking-and-network-policy and use last one the = weave net 
+#   weave net and run command
+kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml
+kubectl get all -n kube-system    # you can see core dns running
+kubectl get nodes                 # you can see status of node ready
+# your master node is ready ans by default can you run your application on master node no it will not let you deploy any pods, default namespace is where we can create pods
+kubectl get pods                   # can we create pods yes but it will not let you assign any resources to you because by default you can not create anything on master node you can check by running 
+kubectl run --image=nginx web-nginx
+kubectl get pods                   # you can see status in pending and if you run 
+kubectl describe pod podname(web-nginx)  #  run it and check events you can see failed scheduling and reason is untolerated taint and by default master node is tainted we can go and untaint it by running 
+kubectl taint nodes --all node-role.kubernetes.io/control-plane-    #check role name = control-plane   kubectl get nodes and check roles
+kubectl get pods                     # now you can see your pod is in running status
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
