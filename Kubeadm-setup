@@ -77,6 +77,63 @@ kubectl get nodes
 kubectl get pods                                                              # now you can see your pod is in running status
 
 
+# we created k8 bare metal on vm and from this bare metal to conect and fetch image data from acr which is outside we needto create service principle and based 
+# on service principle userid and secrete application id and secrete we will be creating a screate file in k8s
+
+kubectl get secrets                     # we create our own secrete
+
+# setup azure cli and do az login
+curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+run sudo az login command
+sudo az acr login --name acrname
+#run sudo az account show copy supscription id
+
+# to connect from vm to acr
+
+# learn.microsoft.com/en-us/azure/container-registry/container-registry-auth-kubernetes
+# Create a service principal by
+
+vim acrpull.sh    # copy paste this script in acrpull.sh
+
+#!/bin/bash
+# This script requires Azure CLI version 2.25.0 or later. Check version with `az --version`.
+
+# Modify for your environment.
+# ACR_NAME: The name of your Azure Container Registry
+# SERVICE_PRINCIPAL_NAME: Must be unique within your AD tenant
+ACR_NAME=$containerRegistry
+SERVICE_PRINCIPAL_NAME=$servicePrincipal
+
+# Obtain the full registry ID
+ACR_REGISTRY_ID=$(az acr show --name $ACR_NAME --query "id" --output tsv)
+# echo $registryId
+
+# Create the service principal with rights scoped to the registry.
+# Default permissions are for docker pull access. Modify the '--role'
+# argument value as desired:
+# acrpull:     pull only
+# acrpush:     push and pull
+# owner:       push, pull, and assign roles
+PASSWORD=$(az ad sp create-for-rbac --name $SERVICE_PRINCIPAL_NAME --scopes $ACR_REGISTRY_ID --role acrpull --query "password" --output tsv)
+USER_NAME=$(az ad sp list --display-name $SERVICE_PRINCIPAL_NAME --query "[].appId" --output tsv)
+
+# Output the service principal's credentials; use these in your services and
+# applications to authenticate to the container registry.
+echo "Service principal ID: $USER_NAME"
+echo "Service principal password: $PASSWORD"
+
+vim acrpull.sh
+
+# change and give your acr name and any name for service principle and give executable permissions
+
+chmod +x acrpull.sh
+bash acrpull.sh
+
+
+
+
+
+
 
 
 
