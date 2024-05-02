@@ -1,1 +1,28 @@
+az group create --name groupname --location eastus
+az create --resource-group groupname --name clustername --node-count 1 --generate-ssh-keys
+az aks install-cli --install-location=./kubectl
+az account set --subscription ff4cb677-0364-4de2-8b81-693a24deb1
+az aks get-credentials --resource-group HEALTHCARE-RG1 --name kubeadmclus1 --overwrite-existing
+kubectl get nodes
+kubectl get deployments
+kubectl get pods
+kubectl get all
+kubectl get ns
+kubectl create ns dev
+kubectl get all -n dev 
+kubectl describe pod podname
+kubectl run --image=nginx web-inginx
+kubectl get deployments
+kubectl get pods
+kubectl describe pod podname
+kubectl create deployment --help
+kubectl create deployment web-nginx --image=nginx --replicas=1
+kubectl get deployments
+kubectl describe deployment deploymentname
+see rollingupdate is the default strategy and default namespace, selectors, labels, replicas
+kubectl delete pod podname
+kubectl delete deployment deploymentname
+kubectl delete svc svcname
+
+
 
