@@ -127,7 +127,7 @@ vim acrpull.sh
 # change and give your acr name and any name for service principle and give executable permissions
 
 chmod +x acrpull.sh
-bash acrpull.sh
+bash acrpull.sh 
 
 
 
