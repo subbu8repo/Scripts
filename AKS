@@ -16,3 +16,7 @@ az vm create \
   --output json \
   --verbose
 az group delete --name learn-azure-cli
+
+
+
+dotnet custom application listens on port 5000
