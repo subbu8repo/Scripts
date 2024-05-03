@@ -9,11 +9,64 @@ very easily by running one single command your nginx will be upgraded and thats 
 Helm charts are packages it contains pre-configured kubernetes resources such as configmaps, deployments, services secrets......etc
 helm is the package manager for K8s that allow easily package, configure and deploy applications onto K8s clusters
 
-installation
+installation go to official website
 
-export VERIFY_CHECKSUM=false
-curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
-helm version
+          #helm.sh/docs/intro/install/
+
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
+
+# you can go to official site of helm and get the packages from artifacthub
+
+artifacthub.io
+
+# take a package like nginx install repo add repository and install chart    # you can take apache2......
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm install my-nginx bitnami/nginx --version 16.0.6
+
+helm repo ls
+helm ls
+helm show all bitnami/nginx
+helm show values bitnami/nginx
+kubectl get all
+kubectl edit svc svcname
+helm upgrade my-nginx bitnami/nginx                                   # one single command to upgrade
+helm ls 
+helm history my-nginx
+helm delete my-nginx
+kubectl get all
+
+# now when i am installing the package i want that it should create the service with my values i should have all controlls and i should  be able to customise the
+# package based on my requirement then you can download the package locally first go through the package and 
+# to download pull the package 
+
+helm pull bitnami/nginx
+helm repo ls                                     # check url by this you get tar file untar it, in command you can use untar flag while pulling
+helm pull --untar bitnami/nginx                   # this will get you the files and you can customise it
+ls -l
+cd nginx/
+tree
+# you can see all the files in values.yml, charts.yml, templates(deployment.yml, service.yml......)
+cd templates/
+ls 
+vi deployment.yaml
+vi service.yaml
+vi values.yaml                             # you can change values here or while executing you can change by usind --set flag
+cd ~
+helm install --set service.type=NodePort my-nginx(name of package) nginx/(where is the file)
+kubectl get all
+
+# other way of setting is create yaml file like custom-values.yaml set values and use it in command
+helm install --values custom-values.yaml my-nginx(any name) nginx/
+
+# you can do helm init and create custom packages and you can add all the yaml files by yourself but you should have knowledge on jinja2 template
+
+
+
+
+
+
 
 
 
