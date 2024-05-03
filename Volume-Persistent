@@ -63,7 +63,7 @@ spec:
   volumes:
     - name: nginx-storage
       persistentVolumeClaim:
-        claimName: task-pv-volume
+        claimName: task-pv-claim
   containers:
     - name: nginx-pv
       image: nginx
