@@ -53,6 +53,29 @@ kubectl describe pv pvcname
 kubectl get pv                                                  # you can see status and claim
 # now you can create a pod and assign this pv to pod
 
+vim pod.yml
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+spec:
+  volumes:
+    - name: nginx-storage
+      persistentVolumeClaim:
+        claimName: task-pv-claim
+  containers:
+    - name: nginx-pv
+      image: nginx
+      ports:
+        - containerPort: 80
+      volumeMounts:
+        - mountPath: "/usr/share/nginx/html"
+          name: nginx-storage
+
+kubectl apply -f pod.yml
+
+
 
 
 
