@@ -1,5 +1,9 @@
 Helm is considered as a package manager for K8s it will manage all these packages for you like if you wanna deploy a webserver like a web application, so you will be deploying directly by using helm 
 simply add helm install nginx 
 now helm is resposible to do all the things for you like if you want a deployment to be created, a service to be created, a volume to be attached, a values to be added all this will be done by helm in backdrop
-this packaging concept of helm is helmchart basically it is a chart wherein there is a couple of multiple files like deployment files, service files...... 
+this packaging concept of helm is helmchart basically it is a chart wherein there is a couple of multiple files like deployment files, service files...... and you will have a centralized location for managing
+things 
+and also like you deployed nginx and tommorow their is a upgrade and you dont have to go to any of the file using helm command all the helm commands you can execute the helm command and you can do the nginx upgrade 
+very easily by running one single command your nginx will be upgraded
+
 
