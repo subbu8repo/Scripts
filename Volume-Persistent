@@ -3,7 +3,7 @@ pv.yml
 # create a path
 sudo mkdir -p /mnt/data
 
-pv.yml
+vi pv.yml
 
 apiVersion: v1
 kind: PersistentVolume
@@ -31,6 +31,30 @@ cd ..
 cd.. or use   cd ~
 df -h    # to check space
 # now we can assign it to pods by binding and binding will be done by using persistent volume claim
+
+pvc.yml
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: task-pv-volume
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 500Mi
+
+vi pvc.yml
+kubecyl apply -f pvc.yml
+kubectl get pvc                                                 # you can see status bounded with pv of nearest pv with 1gb 
+kubectl describe pv pvcname
+kubectl get pv                                                  # you can see status and claim
+# now you can create a pod and assign this pv to pod
+
+
+
 
 
 
