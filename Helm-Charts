@@ -4,6 +4,6 @@ now helm is resposible to do all the things for you like if you want a deploymen
 this packaging concept of helm is helmchart basically it is a chart wherein there is a couple of multiple files like deployment files, service files...... and you will have a centralized location for managing
 things 
 and also like you deployed nginx and tommorow their is a upgrade and you dont have to go to any of the file using helm command all the helm commands you can execute the helm command and you can do the nginx upgrade 
-very easily by running one single command your nginx will be upgraded
+very easily by running one single command your nginx will be upgraded and thats why helm comes very handy
 
 
