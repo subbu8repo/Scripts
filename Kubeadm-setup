@@ -184,7 +184,7 @@ these all above are run in vm
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-These are run in cloud shell
+These are run in cloud shell to connect from k8 cluster to acr
 
 # install kubectl tool
 az aks install-cli --install-location=./kubectl
@@ -209,6 +209,8 @@ kubectl apply -f service.yml
 kubectl get all
 kubectl get service servicename --watch
 kubectl config viewn--raw
+
+
 
 
 
