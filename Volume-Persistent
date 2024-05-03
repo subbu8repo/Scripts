@@ -63,7 +63,7 @@ spec:
   volumes:
     - name: nginx-storage
       persistentVolumeClaim:
-        claimName: task-pv-claim
+        claimName: task-pv-volume
   containers:
     - name: nginx-pv
       image: nginx
@@ -74,6 +74,9 @@ spec:
           name: nginx-storage
 
 kubectl apply -f pod.yml
+kubectl get pods                                 # to access pod assign service or else do a short cut
+kubectl exec -it podname -- /bin/bash            # login to pod
+cat /usr/share/nginx/html/index.html
 
 
 
