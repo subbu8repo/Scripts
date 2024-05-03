@@ -24,5 +24,13 @@ spec:
 kubectl apply -f pv.yml
 kubectl get pv
 kubectl describe pv pvname
+# go to path and create index.html file
+cd /mnt/data
+sudo vi index.html           # use sudo infront because it is a mount file go back to home directory
+cd .. 
+cd.. or use   cd ~
+
+
+
 
   
