@@ -29,6 +29,10 @@ cd /mnt/data
 sudo vi index.html           # use sudo infront because it is a mount file go back to home directory
 cd .. 
 cd.. or use   cd ~
+df -h    # to check space
+# now we can assign it to pods by binding and binding will be done by using persistent volume claim
+
+
 
 
 
