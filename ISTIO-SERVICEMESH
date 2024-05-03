@@ -18,7 +18,11 @@ Istio is an open framework for connecting, securing, managing and monitoring mic
 
 what makes istio so unique is that all these functionalities come with no change of code required
 istio is diveded into two parts control plane and data plane
-control plane has pilot, citadel, galley services together all are istiod
+control plane has 3 important components pilot, citadel, galley  together all are istiod
+pilot handles all the configuration and programming of nyproxy side car and some of the responsibilities is  abserving the service topology, traffic shifting, fault injecction, requesting routing, mirroring
+citadel provides you keys and certificates to enable secure communication and secure connection between services it also provides strong service to service and end user authentication using mtls(mutual transport
+layer security)
+Galley 
 the main responsibility of control plane is it enables secure access and communication between services in a policy driven way
 data plane is implemented in such a way that it intercepts all inbound and outbound traffic from services like loadbalancer or nodeport whichever the service you are using it will intercept all the traffic
 
