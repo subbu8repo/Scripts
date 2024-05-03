@@ -6,4 +6,14 @@ things
 and also like you deployed nginx and tommorow their is a upgrade and you dont have to go to any of the file using helm command all the helm commands you can execute the helm command and you can do the nginx upgrade 
 very easily by running one single command your nginx will be upgraded and thats why helm comes very handy
 
+Helm charts are packages it contains pre-configured kubernetes resources such as configmaps, deployments, services secrets......etc
+helm is the package manager for K8s that allow easily package, configure and deploy applications onto K8s clusters
+
+installation
+
+export VERIFY_CHECKSUM=false
+curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+helm version
+
+
 
