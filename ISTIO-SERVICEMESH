@@ -17,5 +17,9 @@ Istio is an open framework for connecting, securing, managing and monitoring mic
 6. end-to-end authentication
 
 what makes istio so unique is that all these functionalities come with no change of code required
+istio is diveded into two parts control plane and data plane
+control plane has pilot, citadel, galley services together all are istiod
+the main responsibility of control plane is it enables secure access and communication between services in a policy driven way
+data plane is implemented in such a way that it intercepts all inbound and outbound traffic from services like loadbalancer or nodeport whichever the service you are using it will intercept all the traffic
 
 
