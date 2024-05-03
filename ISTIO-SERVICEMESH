@@ -1,1 +1,21 @@
+Istio is a tool that provides service mesh capabilities
+it has network proxy, it takes all your un-encripted requests traffic it will process and encrypt that and send it to the pods it will encrypt(mtls) all the engress traffic
+
+Istio is an open framework for connecting, securing, managing and monitoring microservices
+ istio includes
+1. service discovery
+2. load balancing
+3. failure recovery
+4. tele-metrics
+5. monitoring
+ istio can also handle more complex operational requirements
+1. A/B testing
+2. canary releases
+3. rate limiting
+4. dark launches
+5. access control
+6. end-to-end authentication
+
+what makes istio so unique is that all these functionalities come with no change of code required
+
 
