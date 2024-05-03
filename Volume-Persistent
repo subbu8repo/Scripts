@@ -1,0 +1,28 @@
+pv.yml
+
+# create a path
+sudo mkdir -p /mnt/data
+
+pv.yml
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: task-pv-volume
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/data"
+
+
+kubectl apply -f pv.yml
+kubectl get pv
+kubectl describe pv pvname
+
+  
