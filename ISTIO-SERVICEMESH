@@ -22,8 +22,7 @@ control plane has 3 important components pilot, citadel, galley  together all ar
 pilot handles all the configuration and programming of nyproxy side car and some of the responsibilities is  abserving the service topology, traffic shifting, 
 fault injecction, requesting routing, mirroring
 citadel provides you keys and certificates to enable secure communication and secure connection between services it also provides strong service to 
-service and end user authentication using mtls(mutual transport
-layer security)
+service and end user authentication using mtls(mutual transport layer security)
 Galley core responsibility is to distribute configuration input to other istio components, it writes istio configuration and pushed sent towoards other istio
 components 
 pilot manages the configurations
@@ -50,6 +49,82 @@ cd ~                                                  #   all the ingress networ
 kubectl get all
 kubectl get ns                                         # you can see istio
 kubectl get all -n istio-system
+cd istio-1.21.2                                        # go to path
+kubectl apply -f samples/addons/                       # this will install many addons like kiali, prometheous, grafana.......
+cd samples/addons/
+ls -l
+cd ~
+sudo docker pull devopsmela/java-numeric-app
+sudo docker pull devopsmela/node-js:v1
+sudo docker images
+
+#nsetting up java application into K8s pods
+
+kubectl create ns dev
+kubectl get ns 
+
+vim deployment.yaml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-java
+spec:                  
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-app
+  template: 
+    metadata:
+      labels:
+        app: my-app
+    spec: 
+      containers:
+      - name: my-image
+        image: devopsmela/java-numeric-app
+        ports:
+        - containerPort: 8080                      # check the requirement that java application listens on which port
+
+vi service.yaml
+
+apiVersion: v1
+kind: Service
+metadata: 
+  name: my-service-java
+spec:
+  type: NodePort
+  selector:
+    app: my-app
+  ports:
+  - port: 8080
+
+kubectl apply -f deployment.yaml -n dev 
+kubectl apply -f service.yaml -n dev             # 2-tier application frontend written in java springboot and backend in node-js
+kubectl get all -n dev                         # this java has 3 modules home directory(/), compare, incremental you can check by curl using nodeport of service
+curl 10.108.157.70:8080                     # it shows welcome to devops
+curl 10.108.157.70:8080/compare/50           # Smaller than or equal to 50 till her happened in java application 
+curl 10.108.157.70:8080/increment/99         # it gives 100 but to work this we need node-js images and deployment also as this increment happens in backend
+                                             # application node-js
+kubectl describe -n dev podname
+
+# you can see only one container 1/1 ready as istio is installed in default name space
+
+kiali basically gives you a animated view of how the network is floeing through your services, kiali comes with istio when setting up istio and kiali will give 
+you complete network topology view, by seeing kiali dashboard you can identify whether the traffic is encrypted or not whether the application health is healthy
+or not whether the pod is running or not all this can be done using kiali monitoring tool
+
+kubectl get all -n istio-system                 # to access from outside world change clusterio to nodeport in service kiali
+kubectl edit service/kiali -n istio-system
+kubectl get all -n istio-system
+
+# allow the inbound traffic open port with nodeport 
+
+
+
+
+
+
+
 
 
 
