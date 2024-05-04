@@ -258,7 +258,22 @@ its a query language and it will connect to data store and fetch all those metri
 
 kubectl get all -n istio-system
 kubectl edit service/grafana -n istio-system               # change clusterip to nodeport in service of istio-system
-kubectl get all -n istio-system
+kubectl get svc -n istio-system                            # allow the inbound traffic open port with nodeport using vm public ip and nodeport
+
+kubectl edit service/prometheus -n istio-system              # change clusterip to nodeport in service of istio-system
+kubectl get svc -n istio-system                              # allow the inbound traffic open port with nodeport using vm public ip and nodeport
+
+in prometheus search this and you can see all in table and graph 
+
+istio_requests_total
+container_cpu_load_average_10s
+
+in grafana dashboards search
+
+Istio Control Plane Dashboard
+
+
+  
 
 
 
