@@ -121,7 +121,7 @@ kiali basically gives you a animated view of how the network is floeing through 
 you complete network topology view, by seeing kiali dashboard you can identify whether the traffic is encrypted or not whether the application health is healthy
 or not whether the pod is running or not all this can be done using kiali monitoring tool
 
-kubectl get all -n istio-system                 # to access from outside world change clusterio to nodeport in service kiali
+kubectl get all -n istio-system               # to access from outside world edit and change clusterio to nodeport change clusterip to nodeport in service of istio-system
 kubectl edit service/kiali -n istio-system
 kubectl get all -n istio-system
 
@@ -255,6 +255,10 @@ prometheus is basically will act as middle ware it will capture all the telemetr
 and from their if you want to send some alert mechanism to your slack channel,to your email all these customisation can easily be done by grafana
 prometheus works on pull metrics from your application and prometheus have its own data store  where in all these get store and grafana will be using PROMQL
 its a query language and it will connect to data store and fetch all those metrics
+
+kubectl get all -n istio-system
+kubectl edit service/grafana -n istio-system               # change clusterip to nodeport in service of istio-system
+kubectl get all -n istio-system
 
 
 
