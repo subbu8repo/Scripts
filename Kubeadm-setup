@@ -67,7 +67,7 @@ kubectl get all -n kube-system
 kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml
 kubectl get all -n kube-system                                               # you can see core dns running
 kubectl get nodes                                                            # you can see status of node ready
-# your master node is ready ans by default can you run your application on master node no it will not let you deploy any pods, default namespace is where we can create pods
+# your master node is ready and by default can you run your application on master node no it will not let you deploy any pods, default namespace is where we can create pods
 kubectl get pods                                                             # can we create pods yes but it will not let you assign any resources to you because by default you can not create anything on master node you can check by running 
 kubectl run --image=nginx web-nginx
 kubectl get pods                                                              # you can see status in pending and if you run 
