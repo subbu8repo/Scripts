@@ -117,9 +117,14 @@ kubectl get all -n istio-system                 # to access from outside world c
 kubectl edit service/kiali -n istio-system
 kubectl get all -n istio-system
 
-# allow the inbound traffic open port with nodeport 
+# allow the inbound traffic open port with nodeport using vm public ip and nodeport
+# open kiali dashboard see namespace and send some traffic by using while loop and do curl and watch
 
+kubectl get all -n dev
+while true; do curl 10.108.157.70:8080/compare/51; echo; sleep 1; done 
 
+# we dont have a side car container thats why it is not showing anything
+# by default side car container will not be injected, multiple ways to inject oneway is check labels, at the namespace labels level we can inject sidecar container
 
 
 
