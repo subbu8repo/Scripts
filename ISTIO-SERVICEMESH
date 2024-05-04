@@ -230,6 +230,36 @@ spec:
 kubectl apply -f peerauth.yaml -n dev
 while true; do curl 10.108.157.70:8080/increment/100; echo; sleep 1; done
 
+with kiali we were checking the application health but did we check pods are running are not, cluster is running are not or did we check cluster resources ram, 
+cpu % compute is used no kiali is atool which will give you complete network topology view along with health probes and things like that plus it gives trace
+routes and flow but at infra level how do you monitor stuff like cpu, node avalibility, pods running in.......
+
+# along with istio we have other monitoring tools 
+# K8s has the potential to simply the process of deploying your appliucation in containers and across clouds, but in doing so it leaves you blind as to
+
+1. Monitoring K8s clusters and nodes
+  i. Cluster resource usage
+  ii. Node availability and health 
+
+2. Monitoring K8 deployments, pods                        # K8s monitoring tools (K8s dashboard, K8s metric server, CAdvisor and Heapster)
+   i. Missing and failed pods                             # we have prometheus and Grafana
+   ii. Running vs desired instances
+   iii. Pod resource usage requests and limits
+
+3. Monitoring K8s applications               # this was done by kiali
+   i. Application availability
+   ii. Application health and performance
+
+
+prometheus is basically will act as middle ware it will capture all the telemetric data and that data will be sent to grafana, it is a data visualisation tool
+and from their if you want to send some alert mechanism to your slack channel,to your email all these customisation can easily be done by grafana
+prometheus works on pull metrics from your application and prometheus have its own data store  where in all these get store and grafana will be using PROMQL
+its a query language and it will connect to data store and fetch all those metrics
+
+
+
+
+
 
 
 
