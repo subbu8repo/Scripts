@@ -107,7 +107,9 @@ curl 10.108.157.70:8080/increment/99         # it gives 100 but to work this we 
                                              # application node-js
 kubectl describe -n dev podname
 
-# you can see only one container 1/1 ready as istio is installed in default name space
+# you can see only one container 1/1 ready by default side car container will not be injected, multiple ways to inject oneway is check labels, at the 
+# namespace labels level we can inject sidecar container then you can see 2/2 ready
+
 
 kiali basically gives you a animated view of how the network is floeing through your services, kiali comes with istio when setting up istio and kiali will give 
 you complete network topology view, by seeing kiali dashboard you can identify whether the traffic is encrypted or not whether the application health is healthy
@@ -125,6 +127,8 @@ while true; do curl 10.108.157.70:8080/compare/51; echo; sleep 1; done
 
 # we dont have a side car container thats why it is not showing anything
 # by default side car container will not be injected, multiple ways to inject oneway is check labels, at the namespace labels level we can inject sidecar container
+
+kubectl get ns --show-labels
 
 
 
