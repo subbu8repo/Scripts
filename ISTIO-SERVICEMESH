@@ -44,7 +44,13 @@ curl -L https://istio.io/downloadIstio | sh -
 ls
 cd istio-1.21.2
 export PATH=$PWD/bin:$PATH
-istioctl install --set profile=demo -y                # (demo, default, minimal, remote, empty, preview in real we use default one wherein you will be encrypting
+istioctl install --set profile=demo -y                # (demo, default, minimal, remote, empty, preview in real we use default one wherein you will be encrypting)
+                                                      # kubectl label namespace default istio-injection=enabled
+                                                      # by default side car container will not be injected, multiple ways to inject oneway is check labels, 
+                                                      # at the namespace labels level we can inject sidecar container
+                                                      # and any services or any resources which is getting created inside this namespace will have the side car 
+                                                      # container automatically post that
+
 cd ~                                                  #   all the ingress network traffic )
 kubectl get all
 kubectl get ns                                         # you can see istio
@@ -127,6 +133,8 @@ while true; do curl 10.108.157.70:8080/compare/51; echo; sleep 1; done
 
 # we dont have a side car container thats why it is not showing anything
 # by default side car container will not be injected, multiple ways to inject oneway is check labels, at the namespace labels level we can inject sidecar container
+# and any services or any resources which is getting created inside this namespace will have the side car container automatically post that
+# already some services running in prod and that will not replicated to istio because it already created but it can be integrated
 
 kubectl get ns --show-labels
 
