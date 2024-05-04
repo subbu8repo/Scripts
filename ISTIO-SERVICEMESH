@@ -134,9 +134,76 @@ while true; do curl 10.108.157.70:8080/compare/51; echo; sleep 1; done
 # we dont have a side car container thats why it is not showing anything
 # by default side car container will not be injected, multiple ways to inject oneway is check labels, at the namespace labels level we can inject sidecar container
 # and any services or any resources which is getting created inside this namespace will have the side car container automatically post that
-# already some services running in prod and that will not replicated to istio because it already created but it can be integrated
+# already some services running in dev and that will not replicated to istio because it already created but it can be integrated
 
 kubectl get ns --show-labels
+kubectl label ns dev istio-injection=enabled
+kubectl get ns --show-labels
+kubectl get all -n dev                                     # already some services running in dev and that will not replicated to istio because it already created 
+                                                           # but it can be integrated by restarting the deployment
+kubectl rollout restart deploymentname -n namespace(dev)
+kubectl get all -n dev                                     # you cvan see 2/2 ready
+kubectl describe podname -n namespace(dev)
+
+# now deploy node-js applications also
+
+sudo docker images                                    # edit yaml file and change java image to node-js
+
+vi deployment-nodejs.yaml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-node-js
+spec: 
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-node-js
+  template: 
+    metadata:
+      labels:
+        app: app-node-js
+    spec: 
+      containers:
+      - name: my-nodejs
+        image: devopsmela/node-js:v1
+        ports:
+        - containerPort: 5000                              # check for port and give 
+
+vim service-nodejs.yaml
+
+apiVersion: v1
+kind: Service
+metadata: 
+  name: node-service            
+spec:
+  type: NodePort
+  selector:
+    app: app-node-js
+  ports:
+  - port: 5000
+
+# over here only use node-service because the end points is listening on this particular name because in java application
+# in source(src) in main in java in com in devsecops in controller see base url endpoint it is node-service and port 5000 
+
+kubectl apply -f deployment-nodejs.yaml -n namespace(dev)
+kubectl apply -f service-nodejs.yaml -n namespace(dev)
+kubectl get all -n dev
+
+# now verify incrementak part is working or not because that is where network will flow out of your pods to other pods where we can see in kiali dashboard graph 
+
+curl 10.108.157.70:8080/increment/100           # you can see 101 calculation happening in nodejs app 
+
+# check istio sidecar container
+
+ kubectl describe podname -n namespace(dev)
+
+
+
+
+
+
 
 
 
