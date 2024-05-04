@@ -36,5 +36,25 @@ you are using it will intercept all the traffic
 service mesh is nothing but the network routing which is happening for your micro service applications, service mesh provides you network proxy and it is  
 intercepting all the traffic coming inside going outside based on policies you have set the network is allowed and the network is denied.
 
+setting-up istio and injecting sidecar container
+
+base should be K8s
+istio installation from official website and istio getting started, Download Istio
+
+curl -L https://istio.io/downloadIstio | sh -
+ls
+cd istio-1.21.2
+export PATH=$PWD/bin:$PATH
+istioctl install --set profile=demo -y                # (demo, default, minimal, remote, empty, preview in real we use default one wherein you will be encrypting
+cd ~                                                  #   all the ingress network traffic )
+kubectl get all
+kubectl get ns                                         # you can see istio
+kubectl get all -n istio-system
+
+
+
+
+
+
 
 
