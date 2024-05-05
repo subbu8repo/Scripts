@@ -1,3 +1,4 @@
+Service mesh is adedicated infrastructure layer that controls service to service communication over a network
 Istio is a tool that provides service mesh capabilities
 it has network proxy, it takes all your un-encripted requests traffic it will process and encrypt that and send it to the pods it will encrypt(mtls) all the engress traffic
 
