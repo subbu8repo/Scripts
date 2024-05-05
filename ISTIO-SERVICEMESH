@@ -119,7 +119,7 @@ kubectl describe -n dev podname
 # namespace labels level we can inject sidecar container then you can see 2/2 ready
 
 
-kiali basically gives you a animated view of how the network is floeing through your services, kiali comes with istio when setting up istio and kiali will give 
+kiali basically gives you a animated view of how the network is flowing through your services, kiali comes with istio when setting up istio and kiali will give 
 you complete network topology view, by seeing kiali dashboard you can identify whether the traffic is encrypted or not whether the application health is healthy
 or not whether the pod is running or not all this can be done using kiali monitoring tool
 
