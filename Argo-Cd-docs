@@ -20,4 +20,5 @@ kubectl get svc -n argocd
 # now get node ip
 kubectl get nodes -o wide
 # take external ip and http node port and allow nodeport in vmss and instances and networking and open nodeport inbound traffic
+# now login
 
