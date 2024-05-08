@@ -1,0 +1,23 @@
+# login to K8 cluster
+# grt credentials
+# go to argocd docs
+# get started
+# Install Argo CD
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+# configure argocd to azure repos by login to argocd
+kubectl get secrets -n argocd
+# edit initial admin secret
+kubectl edit secret argocd-initial-admin-secret -n argocd
+# secrets are base 64 encoded decode it by
+echo password | base64 --decode
+# ignore last percentile
+# admin user for argocd is admin and password is = decoded one 
+# to access argocd on ui(browser) expose argocd server to nodeport mode
+kubectl get svc -n argocd
+kubectl edit svc argocd-server -n argocd
+kubectl get svc -n argocd
+# now get node ip
+kubectl get nodes -o wide
+# take external ip and http node port and allow nodeport in vmss and instances and networking and open nodeport inbound traffic
+
