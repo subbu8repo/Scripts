@@ -1,0 +1,34 @@
+kubectl get pods
+ kubectl config current-context
+ cd AKS
+ cd helm
+ ls
+ kubectl create ns robot-shop
+ helm install robot-shop --namespace robot-shop
+ helm install robot-shop --namespace robot-shop . (. dir means everything)
+ kubectl get storageclass
+ kubectl get pods -n robot-shop
+ kubectl get pods -n robot-shop -w
+ kubectl get pods -n robot-shop
+ kubectl describe pod redis-0 -n robot-shop
+ kubectl edit pod redis-0 -n robot-shop
+ kubectl get pvc -n robot-shop
+ kubectl get pods -n robot-shop
+ kubectl get svc -n robot-shop
+ vi ingress.yaml
+ kubectl apply -f ingress.yaml -n robot-shop
+ kubectl get pods -A | grep ingress-appgateway
+ kubectl get pods -n kube-system
+ kubectl get pods -A | grep ingress-appgw
+ kubectl get ing -n robot-shop
+ kubectl get pods -n kube-system
+ kubectl logs deploy/ingress-appgw-deployment -n kube-system
+ kubectl get pods -n kube-system
+ kubectl describe pod ingress-appgw-deployment -n kube-system
+ kubectl get pods -n kube-system
+ kubectl apply -f ingress.yaml -n robot-shop
+ kubectl get pods -n kube-system
+ kubectl get pods -n kube-system
+ kubectl delete pod ingress-appgw-deployment-bd4c6b457-956hf -n kube-system
+ kubectl get pods -n kube-system
+ kubectl get svc -n robot-shop
