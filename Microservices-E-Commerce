@@ -3,6 +3,9 @@ kubectl get pods
  cd AKS
  cd helm
  ls
+/*(Helm v3.x
+# kubectl create ns namespacename
+# helm install name --namespace robot-shop .)*/
  kubectl create ns robot-shop
  helm install robot-shop --namespace robot-shop
  helm install robot-shop --namespace robot-shop . (. dir means everything)
@@ -35,3 +38,6 @@ kubectl get pods
 kubectl get svc 
 kubectl edit svc 
 kubectl get svc
+
+
+
