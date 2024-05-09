@@ -32,3 +32,6 @@ kubectl get pods
  kubectl delete pod ingress-appgw-deployment-bd4c6b457-956hf -n kube-system
  kubectl get pods -n kube-system
  kubectl get svc -n robot-shop
+kubectl get svc 
+kubectl edit svc 
+kubectl get svc
