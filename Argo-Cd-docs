@@ -26,6 +26,7 @@ take pat token of azure devops and repo clone https url
 replace organisation name with pat token and enter repository url and click connect git to argocd part is finished
 now go to application and create new app kepp sync policy automatic
 by default argocd takes 3 minutes to identify changes in git and deploy it to K8s cluster but you can change it to 10seconds also
-select path is K8 manifest files 
+select path is K8 manifest files
+
 
 
