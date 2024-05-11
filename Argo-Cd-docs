@@ -26,7 +26,24 @@ take pat token of azure devops and repo clone https url
 replace organisation name with pat token and enter repository url and click connect git to argocd part is finished
 now go to application and create new app kepp sync policy automatic
 by default argocd takes 3 minutes to identify changes in git and deploy it to K8s cluster but you can change it to 10seconds also
-select path is K8 manifest files
+kubectl edit cm argocd-cm -n argocd   (configmap)
+add at end 
+data:
+  timeout.reconciliation: 10s
+select path and path is K8 manifest files
+kubectl get pods
+you can see imagepullbackoff error
+kubectl edit pod podname
+you will see image is updated but it is in private registry so you use a concept call imagepullsecret
+use access keys or service principle 
+Command to create ACR ImagePullSecret
+kubectl create secret docker-registry <secret-name> \
+    --namespace <namespace> \
+    --docker-server=<container-registry-name>.azurecr.io \
+    --docker-username=<service-principal-ID> \
+    --docker-password=<service-principal-password>
+
+now add imagepullsecret in deployment files.yaml
 
 
 
