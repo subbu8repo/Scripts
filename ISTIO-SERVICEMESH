@@ -44,7 +44,7 @@ istio installation from official website and istio getting started, Download Ist
 
 curl -L https://istio.io/downloadIstio | sh -
 ls
-cd istio-1.21.2
+cd istio-1.21.2                           # this version gets updated each time check version
 export PATH=$PWD/bin:$PATH
 istioctl install --set profile=demo -y                # (demo, default, minimal, remote, empty, preview in real we use default one wherein you will be encrypting)
                                                       # kubectl label namespace default istio-injection=enabled
