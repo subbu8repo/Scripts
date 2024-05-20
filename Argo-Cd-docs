@@ -45,6 +45,10 @@ kubectl create secret docker-registry <secret-name> \
     --docker-password=<service-principal-password>
 
 now add imagepullsecret in deployment files.yaml
+
+kubectl edit pod podname
+kubectl edit deploy deployname
+search \imagePull and check it is created or not
 kubectl get deploy
 kubectl get pods
 kubectl get pods -w
