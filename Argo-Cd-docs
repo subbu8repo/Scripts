@@ -34,6 +34,7 @@ select path and path is K8 manifest files
 kubectl get pods
 you can see imagepullbackoff error
 kubectl edit pod podname
+kubectl edit deploy deployname
 you will see image is updated but it is in private registry so you use a concept call imagepullsecret
 use access keys or service principle 
 Command to create ACR ImagePullSecret
