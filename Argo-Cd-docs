@@ -46,6 +46,7 @@ kubectl create secret docker-registry <secret-name> \
 now add imagepullsecret in deployment files.yaml
 kubectl get deploy
 kubectl get pods
+kubectl get pods -w
 kubectl get svc get nodeport
 kubectl get node -o wide get externalip and configure nodeport number in vmss network inbound 
 check in web
