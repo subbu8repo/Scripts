@@ -44,6 +44,14 @@ kubectl create secret docker-registry <secret-name> \
     --docker-username=<service-principal-ID> \
     --docker-password=<service-principal-password>
 
+ACR
+
+kubectl create secret docker-registry <secret-name> \
+    --namespace <namespace> \
+    --docker-server=<container-registry-name>.azurecr.io \
+    --docker-username=<service-principal-ID> \
+    --docker-password=<service-principal-password>
+
 now add imagepullsecret in deployment files.yaml
 kubectl get secret -n namespace
 kubectl edit pod podname
